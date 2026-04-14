@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<h2>My Profile</h2>
+
+<p><strong>Username:</strong> {{ user.username }}</p>
+
+<hr>
+
+<h3>My Posts</h3>
+
+{% for post in posts %}
+    <div class="card mb-3 p-3">
+        <h5>{{ post.title }}</h5>
+        <p>{{ post.content|truncatewords:10 }}</p>
+
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </div>
+{% empty %}
+    <p>You have not created any posts yet.</p>
+{% endfor %}
+
+{% endblock %}
